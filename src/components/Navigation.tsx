@@ -13,7 +13,9 @@ const Navigation = () => {
     { name: 'Womens', href: '/womens' },
     { name: 'Kids', href: '/kids' },
     { name: 'Sportswear', href: '/sportswear' },
-    { name: 'Customize', href: '/customize' },
+    { name: 'Accessories', href: '/accessories' },
+    { name: 'Shoes', href: '/shoes' },
+    { name: 'Admin', href: '/admin' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
