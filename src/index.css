@@ -1,42 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ZAFIRAH Fashion - Luxury Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Premium Black Theme */
+    --background: 0 0% 8%;
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 45 100% 85%;
+    --primary-foreground: 0 0% 8%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 90%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 45 85% 75%;
+    --accent-foreground: 0 0% 8%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 25%;
+    --input: 0 0% 15%;
+    --ring: 45 85% 75%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom Design Tokens */
+    --gold: 45 100% 85%;
+    --gold-dark: 45 85% 75%;
+    --gold-light: 45 100% 95%;
+    
+    --charcoal: 0 0% 8%;
+    --charcoal-light: 0 0% 15%;
+    --charcoal-lighter: 0 0% 25%;
+    
+    --pearl: 0 0% 98%;
+    --pearl-dark: 0 0% 95%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 8%) 0%, hsl(0 0% 12%) 50%, hsl(0 0% 8%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(45 100% 85%) 0%, hsl(45 85% 75%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 12%) 0%, hsl(0 0% 10%) 100%);
+    
+    /* Shadows */
+    --shadow-elegant: 0 25px 50px -12px hsl(0 0% 0% / 0.6);
+    --shadow-gold: 0 10px 30px -10px hsl(45 85% 75% / 0.3);
+    --shadow-card: 0 10px 25px -5px hsl(0 0% 0% / 0.4);
+    
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-elegant: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +127,136 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair;
+  }
+}
+
+@layer components {
+  /* Hero Section Animations */
+  .hero-fade-in {
+    @apply animate-[fadeInUp_0.8s_ease-out_forwards] opacity-0;
+  }
+
+  .hero-fade-in-delay {
+    @apply animate-[fadeInUp_0.8s_ease-out_0.3s_forwards] opacity-0;
+  }
+
+  /* Product Card Hover Effects */
+  .product-card {
+    @apply transition-all duration-500 ease-out hover:scale-105 hover:shadow-[var(--shadow-elegant)];
+  }
+
+  .product-card-image {
+    @apply transition-transform duration-700 ease-out hover:scale-110;
+  }
+
+  /* Button Variants */
+  .btn-luxury {
+    @apply bg-gradient-to-r from-[hsl(var(--gold))] to-[hsl(var(--gold-dark))] text-[hsl(var(--charcoal))] font-semibold px-8 py-4 rounded-md transition-all duration-300 hover:shadow-[var(--shadow-gold)] hover:scale-105;
+  }
+
+  .btn-outline-luxury {
+    @apply border-2 border-[hsl(var(--gold))] text-[hsl(var(--gold))] bg-transparent font-semibold px-8 py-4 rounded-md transition-all duration-300 hover:bg-[hsl(var(--gold))] hover:text-[hsl(var(--charcoal))] hover:shadow-[var(--shadow-gold)];
+  }
+
+  /* Navigation Effects */
+  .nav-link {
+    @apply relative transition-colors duration-300 hover:text-[hsl(var(--gold))] after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-[hsl(var(--gold))] after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  /* Card Styles */
+  .luxury-card {
+    @apply bg-[var(--gradient-card)] border border-[hsl(var(--border))] rounded-lg shadow-[var(--shadow-card)] backdrop-blur-sm;
+  }
+
+  /* Text Gradients */
+  .text-gold-gradient {
+    @apply bg-gradient-to-r from-[hsl(var(--gold))] to-[hsl(var(--gold-dark))] bg-clip-text text-transparent;
+  }
+
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-[hsl(var(--charcoal-light))];
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-[hsl(var(--gold))] rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-[hsl(var(--gold-dark))];
+  }
+}
+
+@layer utilities {
+  /* Animation Keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  @keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 0 0 0 hsl(var(--gold) / 0.7); }
+    50% { box-shadow: 0 0 0 10px hsl(var(--gold) / 0); }
+  }
+
+  /* Utility Classes */
+  .shimmer-effect {
+    @apply relative overflow-hidden before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:animate-[shimmer_2s_infinite];
+  }
+
+  .pulse-gold {
+    @apply animate-[pulse-gold_2s_infinite];
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-gold {
+    background: var(--gradient-gold);
+  }
+
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .shadow-elegant {
+    box-shadow: var(--shadow-elegant);
+  }
+
+  .shadow-gold {
+    box-shadow: var(--shadow-gold);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .transition-elegant {
+    transition: var(--transition-elegant);
   }
 }
