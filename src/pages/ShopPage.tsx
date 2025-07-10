@@ -16,8 +16,6 @@ interface Product {
   image: string;
   rating: number;
   reviews: number;
-  colors: string[];
-  sizes: string[];
   category: string;
   isNew?: boolean;
   sale?: boolean;
@@ -33,8 +31,6 @@ const ShopPage = ({ category, title }: ShopPageProps) => {
   const [sortBy, setSortBy] = useState('featured');
   const [filters, setFilters] = useState({
     priceRange: '',
-    size: '',
-    color: '',
     rating: ''
   });
 
@@ -48,8 +44,6 @@ const ShopPage = ({ category, title }: ShopPageProps) => {
       image: mensProduct,
       rating: 4.8,
       reviews: 124,
-      colors: ['Black', 'White', 'Navy'],
-      sizes: ['S', 'M', 'L', 'XL'],
       category: 'mens',
       sale: true
     },
@@ -60,8 +54,6 @@ const ShopPage = ({ category, title }: ShopPageProps) => {
       image: womensProduct,
       rating: 4.9,
       reviews: 87,
-      colors: ['Black', 'Champagne', 'Navy'],
-      sizes: ['XS', 'S', 'M', 'L'],
       category: 'womens',
       isNew: true
     },
@@ -72,8 +64,6 @@ const ShopPage = ({ category, title }: ShopPageProps) => {
       image: kidsProduct,
       rating: 4.7,
       reviews: 56,
-      colors: ['Black', 'White', 'Grey'],
-      sizes: ['2T', '3T', '4T', '5T'],
       category: 'kids'
     },
     {
@@ -83,8 +73,6 @@ const ShopPage = ({ category, title }: ShopPageProps) => {
       image: sportswearProduct,
       rating: 4.6,
       reviews: 203,
-      colors: ['Black', 'Grey', 'Navy'],
-      sizes: ['S', 'M', 'L', 'XL', 'XXL'],
       category: 'sportswear',
       isNew: true
     },
@@ -161,17 +149,6 @@ const ShopPage = ({ category, title }: ShopPageProps) => {
                 ${product.originalPrice}
               </span>
             )}
-          </div>
-          <div className="flex space-x-1">
-            {product.colors.slice(0, 3).map((color, index) => (
-              <div
-                key={index}
-                className="w-4 h-4 rounded-full border border-border"
-                style={{
-                  backgroundColor: color.toLowerCase() === 'champagne' ? '#F7E7CE' : color.toLowerCase()
-                }}
-              />
-            ))}
           </div>
         </div>
       </CardContent>
@@ -254,41 +231,6 @@ const ShopPage = ({ category, title }: ShopPageProps) => {
                 </Select>
               </div>
 
-              {/* Size Filter */}
-              <div className="space-y-3">
-                <h4 className="text-sm font-medium text-pearl">Size</h4>
-                <div className="grid grid-cols-3 gap-2">
-                  {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map((size) => (
-                    <Button
-                      key={size}
-                      variant={filters.size === size ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setFilters({...filters, size: filters.size === size ? '' : size})}
-                    >
-                      {size}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Color Filter */}
-              <div className="space-y-3">
-                <h4 className="text-sm font-medium text-pearl">Color</h4>
-                <div className="flex flex-wrap gap-2">
-                  {['Black', 'White', 'Navy', 'Grey', 'Champagne'].map((color) => (
-                    <button
-                      key={color}
-                      className={`w-8 h-8 rounded-full border-2 ${
-                        filters.color === color ? 'border-gold' : 'border-border'
-                      }`}
-                      style={{
-                        backgroundColor: color.toLowerCase() === 'champagne' ? '#F7E7CE' : color.toLowerCase()
-                      }}
-                      onClick={() => setFilters({...filters, color: filters.color === color ? '' : color})}
-                    />
-                  ))}
-                </div>
-              </div>
 
               {/* Rating Filter */}
               <div className="space-y-3">
@@ -319,7 +261,7 @@ const ShopPage = ({ category, title }: ShopPageProps) => {
               <Button
                 variant="outline"
                 className="w-full mt-4"
-                onClick={() => setFilters({ priceRange: '', size: '', color: '', rating: '' })}
+                onClick={() => setFilters({ priceRange: '', rating: '' })}
               >
                 Clear All Filters
               </Button>
