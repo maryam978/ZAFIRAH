@@ -12,19 +12,22 @@ import { useToast } from '@/hooks/use-toast';
 const AdminPage = () => {
   const { toast } = useToast();
   const [products, setProducts] = useState([
-    { id: 1, name: 'Premium Dress Shirt', category: 'mens', price: 89, stock: 25 },
-    { id: 2, name: 'Elegant Dress', category: 'womens', price: 129, stock: 15 },
-    { id: 3, name: 'Kids T-Shirt', category: 'kids', price: 29, stock: 40 },
-    { id: 4, name: 'Running Shoes', category: 'shoes', price: 159, stock: 20 },
-    { id: 5, name: 'Designer Handbag', category: 'accessories', price: 199, stock: 12 },
+    { id: 1, name: 'Premium Dress Shirt', category: 'mens', price: 89, stock: 25, image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400' },
+    { id: 2, name: 'Elegant Dress', category: 'womens', price: 129, stock: 15, image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400' },
+    { id: 3, name: 'Kids T-Shirt', category: 'kids', price: 29, stock: 40, image: 'https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=400' },
+    { id: 4, name: 'Running Shoes', category: 'shoes', price: 159, stock: 20, image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400' },
+    { id: 5, name: 'Designer Handbag', category: 'accessories', price: 199, stock: 12, image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400' },
   ]);
+
+  const [editingProduct, setEditingProduct] = useState<any>(null);
 
   const [newProduct, setNewProduct] = useState({
     name: '',
     category: '',
     price: '',
     stock: '',
-    description: ''
+    description: '',
+    image: ''
   });
 
   const [siteSettings, setSiteSettings] = useState({
@@ -45,19 +48,66 @@ const AdminPage = () => {
     }
 
     const product = {
-      id: products.length + 1,
+      id: Date.now(), // Use timestamp for unique ID
       name: newProduct.name,
       category: newProduct.category,
       price: parseInt(newProduct.price),
-      stock: parseInt(newProduct.stock) || 0
+      stock: parseInt(newProduct.stock) || 0,
+      image: newProduct.image || 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400'
     };
     setProducts([...products, product]);
-    setNewProduct({ name: '', category: '', price: '', stock: '', description: '' });
+    setNewProduct({ name: '', category: '', price: '', stock: '', description: '', image: '' });
     
     toast({
       title: "Product Added",
       description: `${product.name} has been successfully added to the catalog.`,
     });
+  };
+
+  const handleEditProduct = (product: any) => {
+    setEditingProduct(product);
+    setNewProduct({
+      name: product.name,
+      category: product.category,
+      price: product.price.toString(),
+      stock: product.stock.toString(),
+      description: '',
+      image: product.image
+    });
+  };
+
+  const handleUpdateProduct = () => {
+    if (!newProduct.name || !newProduct.category || !newProduct.price) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in name, category, and price to update the product.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const updatedProduct = {
+      ...editingProduct,
+      name: newProduct.name,
+      category: newProduct.category,
+      price: parseInt(newProduct.price),
+      stock: parseInt(newProduct.stock) || 0,
+      image: newProduct.image || editingProduct.image
+    };
+
+    setProducts(products.map(p => p.id === editingProduct.id ? updatedProduct : p));
+    setEditingProduct(null);
+    setNewProduct({ name: '', category: '', price: '', stock: '', description: '', image: '' });
+    
+    toast({
+      title: "Product Updated",
+      description: `${updatedProduct.name} has been successfully updated.`,
+    });
+  };
+
+  const handleCancelEdit = () => {
+    setEditingProduct(null);
+    setNewProduct({ name: '', category: '', price: '', stock: '', description: '', image: '' });
   };
 
   const handleDeleteProduct = (id: number) => {
@@ -105,7 +155,13 @@ const AdminPage = () => {
               <CardContent>
                 <div className="space-y-4">
                   {products.map((product) => (
-                    <div key={product.id} className="flex items-center justify-between p-4 bg-charcoal-light rounded-lg">
+                  <div key={product.id} className="flex items-center justify-between p-4 bg-charcoal-light rounded-lg">
+                    <div className="flex items-center space-x-4">
+                      <img 
+                        src={product.image} 
+                        alt={product.name}
+                        className="w-16 h-16 object-cover rounded"
+                      />
                       <div className="flex-1">
                         <h3 className="font-semibold text-pearl">{product.name}</h3>
                         <div className="flex items-center space-x-4 text-sm text-muted-foreground">
@@ -114,19 +170,25 @@ const AdminPage = () => {
                           <span>Stock: {product.stock}</span>
                         </div>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <Button variant="outline" size="sm">
-                          <Edit3 className="h-4 w-4" />
-                        </Button>
-                        <Button 
-                          variant="destructive" 
-                          size="sm"
-                          onClick={() => handleDeleteProduct(product.id)}
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
                     </div>
+                    <div className="flex items-center space-x-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => handleEditProduct(product)}
+                      >
+                        <Edit3 className="h-4 w-4" />
+                        Edit
+                      </Button>
+                      <Button 
+                        variant="destructive" 
+                        size="sm"
+                        onClick={() => handleDeleteProduct(product.id)}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
                   ))}
                 </div>
               </CardContent>
@@ -138,7 +200,7 @@ const AdminPage = () => {
               <CardHeader>
                 <CardTitle className="text-gold flex items-center">
                   <Plus className="h-5 w-5 mr-2" />
-                  Add New Product
+                  {editingProduct ? 'Edit Product' : 'Add New Product'}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -195,16 +257,30 @@ const AdminPage = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label>Product Image</Label>
-                  <div className="border-2 border-dashed border-border rounded-lg p-6 text-center">
-                    <Image className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                    <p className="text-sm text-muted-foreground">Click to upload product image</p>
-                  </div>
+                  <Label>Product Image URL</Label>
+                  <Input
+                    value={newProduct.image}
+                    onChange={(e) => setNewProduct({...newProduct, image: e.target.value})}
+                    placeholder="https://images.unsplash.com/photo-1234567890/product.jpg"
+                  />
+                  <p className="text-xs text-muted-foreground">Enter image URL or use Unsplash images</p>
                 </div>
-                <Button onClick={handleAddProduct} className="btn-luxury w-full">
-                  <Plus className="h-4 w-4 mr-2" />
-                  Add Product
-                </Button>
+                {editingProduct ? (
+                  <div className="flex space-x-2">
+                    <Button onClick={handleUpdateProduct} className="btn-luxury flex-1">
+                      <Save className="h-4 w-4 mr-2" />
+                      Update Product
+                    </Button>
+                    <Button onClick={handleCancelEdit} variant="outline" className="flex-1">
+                      Cancel
+                    </Button>
+                  </div>
+                ) : (
+                  <Button onClick={handleAddProduct} className="btn-luxury w-full">
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add Product
+                  </Button>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
