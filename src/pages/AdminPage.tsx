@@ -7,8 +7,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useToast } from '@/hooks/use-toast';
 
 const AdminPage = () => {
+  const { toast } = useToast();
   const [products, setProducts] = useState([
     { id: 1, name: 'Premium Dress Shirt', category: 'mens', price: 89, stock: 25 },
     { id: 2, name: 'Elegant Dress', category: 'womens', price: 129, stock: 15 },
@@ -33,21 +35,39 @@ const AdminPage = () => {
   });
 
   const handleAddProduct = () => {
-    if (newProduct.name && newProduct.category && newProduct.price) {
-      const product = {
-        id: products.length + 1,
-        name: newProduct.name,
-        category: newProduct.category,
-        price: parseInt(newProduct.price),
-        stock: parseInt(newProduct.stock) || 0
-      };
-      setProducts([...products, product]);
-      setNewProduct({ name: '', category: '', price: '', stock: '', description: '' });
+    if (!newProduct.name || !newProduct.category || !newProduct.price) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in name, category, and price to add a product.",
+        variant: "destructive",
+      });
+      return;
     }
+
+    const product = {
+      id: products.length + 1,
+      name: newProduct.name,
+      category: newProduct.category,
+      price: parseInt(newProduct.price),
+      stock: parseInt(newProduct.stock) || 0
+    };
+    setProducts([...products, product]);
+    setNewProduct({ name: '', category: '', price: '', stock: '', description: '' });
+    
+    toast({
+      title: "Product Added",
+      description: `${product.name} has been successfully added to the catalog.`,
+    });
   };
 
   const handleDeleteProduct = (id: number) => {
+    const productToDelete = products.find(p => p.id === id);
     setProducts(products.filter(p => p.id !== id));
+    
+    toast({
+      title: "Product Deleted",
+      description: `${productToDelete?.name} has been removed from the catalog.`,
+    });
   };
 
   const categories = ['new', 'mens', 'womens', 'kids', 'sportswear', 'accessories', 'shoes'];
@@ -229,7 +249,15 @@ const AdminPage = () => {
                     rows={2}
                   />
                 </div>
-                <Button className="btn-luxury">
+                <Button 
+                  className="btn-luxury"
+                  onClick={() => {
+                    toast({
+                      title: "Settings Saved",
+                      description: "Website settings have been updated successfully.",
+                    });
+                  }}
+                >
                   <Save className="h-4 w-4 mr-2" />
                   Save Settings
                 </Button>
