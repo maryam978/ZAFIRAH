@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ShoppingCart, Search, User } from 'lucide-react';
+import { Menu, X, Search, User } from 'lucide-react';
 import { Button } from './ui/button';
+import { CartSheet } from './CartSheet';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,11 +27,16 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <img 
-              src="/lovable-uploads/0ae6e025-e2c5-4418-9297-163f08305acc.png" 
-              alt="ZAFIRAH Logo" 
-              className="h-10 w-auto"
-            />
+            <div className="w-12 h-12 rounded-full overflow-hidden bg-white/10 flex items-center justify-center">
+              <img 
+                src="/lovable-uploads/0ae6e025-e2c5-4418-9297-163f08305acc.png" 
+                alt="ZAFIRAH Logo" 
+                className="w-10 h-10 object-cover"
+              />
+            </div>
+            <span className="text-2xl font-playfair font-bold text-gold-gradient">
+              ZAFIRAH
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -56,12 +62,7 @@ const Navigation = () => {
             <Button variant="ghost" size="icon" className="text-foreground hover:text-gold">
               <User className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon" className="text-foreground hover:text-gold relative">
-              <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 h-4 w-4 bg-gold text-charcoal text-xs rounded-full flex items-center justify-center">
-                3
-              </span>
-            </Button>
+            <CartSheet />
 
             {/* Mobile menu button */}
             <Button

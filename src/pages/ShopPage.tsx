@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { Filter, Grid, List, Search, Star, Heart } from 'lucide-react';
+import { Filter, Grid, List, Search, Star, Heart, ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useCart } from '@/contexts/CartContext';
+import { useToast } from '@/hooks/use-toast';
 import mensProduct from '@/assets/mens-product.jpg';
 import womensProduct from '@/assets/womens-product.jpg';
 import kidsProduct from '@/assets/kids-product.jpg';
@@ -33,6 +35,9 @@ const ShopPage = ({ category, title }: ShopPageProps) => {
     priceRange: '',
     rating: ''
   });
+  
+  const { addToCart } = useCart();
+  const { toast } = useToast();
 
   // Sample products - in a real app, this would come from an API
   const allProducts: Product[] = [
@@ -84,7 +89,14 @@ const ShopPage = ({ category, title }: ShopPageProps) => {
     if (category === 'new' && !product.isNew) return false;
     return true;
   });
-
+  
+  const handleAddToCart = (product: Product) => {
+    addToCart(product);
+    toast({
+      title: "Added to Cart",
+      description: `${product.name} has been added to your cart.`,
+    });
+  };
   const ProductCard = ({ product }: { product: Product }) => (
     <Card className="luxury-card group cursor-pointer product-card overflow-hidden">
       <div className="relative">
@@ -113,9 +125,12 @@ const ShopPage = ({ category, title }: ShopPageProps) => {
           <Heart className="h-4 w-4" />
         </Button>
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-          <Button className="btn-luxury opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-4 group-hover:translate-y-0">
-            Quick View
-          </Button>
+          <div className="opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-4 group-hover:translate-y-0 space-y-2">
+            <Button className="btn-luxury w-full" onClick={() => handleAddToCart(product)}>
+              <ShoppingCart className="h-4 w-4 mr-2" />
+              Add to Cart
+            </Button>
+          </div>
         </div>
       </div>
       <CardContent className="p-4">
