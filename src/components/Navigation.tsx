@@ -25,13 +25,12 @@ const Navigation = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-gold rounded-full flex items-center justify-center">
-              <span className="text-charcoal font-bold">Z</span>
-            </div>
-            <span className="text-2xl font-playfair font-bold text-gold-gradient">
-              ZAFIRAH
-            </span>
+          <Link to="/" className="flex items-center space-x-3">
+            <img 
+              src="/lovable-uploads/0ae6e025-e2c5-4418-9297-163f08305acc.png" 
+              alt="ZAFIRAH Logo" 
+              className="h-10 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
