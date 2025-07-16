@@ -1,27 +1,12 @@
 import { useState } from 'react';
-import { Filter, Grid, List, Search, Star, Heart, ShoppingCart } from 'lucide-react';
+import { Filter, Grid, List, Search, Star, Heart, ShoppingCart, Download, Book } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
-import mensProduct from '@/assets/mens-product.jpg';
-import womensProduct from '@/assets/womens-product.jpg';
-import kidsProduct from '@/assets/kids-product.jpg';
-import sportswearProduct from '@/assets/sportswear-product.jpg';
+import { useProducts, Product, Ebook } from '@/contexts/ProductsContext';
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  rating: number;
-  reviews: number;
-  category: string;
-  isNew?: boolean;
-  sale?: boolean;
-}
 
 interface ShopPageProps {
   category: string;
@@ -38,137 +23,130 @@ const ShopPage = ({ category, title }: ShopPageProps) => {
   
   const { addToCart } = useCart();
   const { toast } = useToast();
+  const { products, ebooks } = useProducts();
 
-  // Sample products - in a real app, this would come from an API
-  const allProducts: Product[] = [
-    {
-      id: 1,
-      name: "Premium Black Dress Shirt",
-      price: 89,
-      originalPrice: 120,
-      image: mensProduct,
-      rating: 4.8,
-      reviews: 124,
-      category: 'mens',
-      sale: true
-    },
-    {
-      id: 2,
-      name: "Elegant Evening Dress",
-      price: 199,
-      image: womensProduct,
-      rating: 4.9,
-      reviews: 87,
-      category: 'womens',
-      isNew: true
-    },
-    {
-      id: 3,
-      name: "Kids Designer Outfit",
-      price: 69,
-      image: kidsProduct,
-      rating: 4.7,
-      reviews: 56,
-      category: 'kids'
-    },
-    {
-      id: 4,
-      name: "Performance Athletic Set",
-      price: 149,
-      image: sportswearProduct,
-      rating: 4.6,
-      reviews: 203,
-      category: 'sportswear',
-      isNew: true
-    },
-    // Add more products for each category
-  ];
-
-  const filteredProducts = allProducts.filter(product => {
-    if (category !== 'new' && product.category !== category) return false;
-    if (category === 'new' && !product.isNew) return false;
-    return true;
-  });
+  // Filter products or ebooks based on category
+  const filteredItems = category === 'ebooks' 
+    ? ebooks 
+    : products.filter(product => {
+        if (category !== 'new' && product.category !== category) return false;
+        if (category === 'new' && !product.isNew) return false;
+        return true;
+      });
   
-  const handleAddToCart = (product: Product) => {
-    addToCart(product);
-    toast({
-      title: "Added to Cart",
-      description: `${product.name} has been added to your cart.`,
-    });
+  const getItemName = (item: Product | Ebook) => {
+    return category === 'ebooks' ? (item as Ebook).title : (item as Product).name;
   };
-  const ProductCard = ({ product }: { product: Product }) => (
-    <Card className="luxury-card group cursor-pointer product-card overflow-hidden">
-      <div className="relative">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-64 object-cover product-card-image"
-        />
-        <div className="absolute top-4 left-4">
-          {product.isNew && (
-            <span className="bg-gold text-charcoal text-xs font-semibold px-2 py-1 rounded">
-              NEW
-            </span>
-          )}
-          {product.sale && (
-            <span className="bg-destructive text-white text-xs font-semibold px-2 py-1 rounded ml-2">
-              SALE
-            </span>
-          )}
-        </div>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 hover:bg-black/40 text-white"
-        >
-          <Heart className="h-4 w-4" />
-        </Button>
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-          <div className="opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-4 group-hover:translate-y-0 space-y-2">
-            <Button className="btn-luxury w-full" onClick={() => handleAddToCart(product)}>
-              <ShoppingCart className="h-4 w-4 mr-2" />
-              Add to Cart
-            </Button>
-          </div>
-        </div>
-      </div>
-      <CardContent className="p-4">
-        <h3 className="font-semibold text-pearl mb-2 line-clamp-1">
-          {product.name}
-        </h3>
-        <div className="flex items-center mb-2">
-          <div className="flex items-center">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={`h-4 w-4 ${
-                  i < Math.floor(product.rating)
-                    ? 'text-gold fill-current'
-                    : 'text-muted-foreground'
-                }`}
-              />
-            ))}
-          </div>
-          <span className="text-sm text-muted-foreground ml-2">
-            ({product.reviews})
-          </span>
-        </div>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <span className="text-lg font-semibold text-gold">
-              ${product.price}
-            </span>
-            {product.originalPrice && (
-              <span className="text-sm text-muted-foreground line-through">
-                ${product.originalPrice}
+
+  const handleAddToCart = (item: Product | Ebook) => {
+    const itemName = getItemName(item);
+    // For ebooks, we'll handle differently or add to cart as well
+    if (category === 'ebooks') {
+      toast({
+        title: "E-book Added",
+        description: `${itemName} has been added to your cart.`,
+      });
+    } else {
+      addToCart(item as Product);
+      toast({
+        title: "Added to Cart",
+        description: `${itemName} has been added to your cart.`,
+      });
+    }
+  };
+  const ProductCard = ({ item }: { item: Product | Ebook }) => {
+    const isEbook = category === 'ebooks';
+    const displayName = isEbook ? (item as Ebook).title : (item as Product).name;
+    const displayImage = item.image;
+    
+    return (
+      <Card className="luxury-card group cursor-pointer product-card overflow-hidden">
+        <div className="relative">
+          <img
+            src={displayImage}
+            alt={displayName}
+            className="w-full h-64 object-cover product-card-image"
+          />
+          <div className="absolute top-4 left-4">
+            {isEbook && (
+              <span className="bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded">
+                E-BOOK
+              </span>
+            )}
+            {!isEbook && (item as Product).isNew && (
+              <span className="bg-gold text-charcoal text-xs font-semibold px-2 py-1 rounded">
+                NEW
+              </span>
+            )}
+            {!isEbook && (item as Product).sale && (
+              <span className="bg-destructive text-white text-xs font-semibold px-2 py-1 rounded ml-2">
+                SALE
               </span>
             )}
           </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 hover:bg-black/40 text-white"
+          >
+            <Heart className="h-4 w-4" />
+          </Button>
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+            <div className="opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-4 group-hover:translate-y-0 space-y-2">
+              <Button className="btn-luxury w-full" onClick={() => handleAddToCart(item)}>
+                {isEbook ? <Download className="h-4 w-4 mr-2" /> : <ShoppingCart className="h-4 w-4 mr-2" />}
+                {isEbook ? 'Download' : 'Add to Cart'}
+              </Button>
+            </div>
+          </div>
         </div>
-      </CardContent>
-    </Card>
-  );
+        <CardContent className="p-4">
+          <h3 className="font-semibold text-pearl mb-2 line-clamp-1">
+            {displayName}
+          </h3>
+          {isEbook && (item as Ebook).author && (
+            <p className="text-sm text-muted-foreground mb-2">
+              by {(item as Ebook).author}
+            </p>
+          )}
+          <div className="flex items-center mb-2">
+            <div className="flex items-center">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className={`h-4 w-4 ${
+                    i < Math.floor(item.rating)
+                      ? 'text-gold fill-current'
+                      : 'text-muted-foreground'
+                  }`}
+                />
+              ))}
+            </div>
+            <span className="text-sm text-muted-foreground ml-2">
+              ({item.reviews})
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <span className="text-lg font-semibold text-gold">
+                ${item.price}
+              </span>
+              {item.originalPrice && (
+                <span className="text-sm text-muted-foreground line-through">
+                  ${item.originalPrice}
+                </span>
+              )}
+            </div>
+          </div>
+          {isEbook && (item as Ebook).pages && (
+            <p className="text-xs text-muted-foreground mt-2">
+              {(item as Ebook).pages} pages
+            </p>
+          )}
+        </CardContent>
+      </Card>
+    );
+  };
 
   return (
     <div className="min-h-screen pt-16">
@@ -181,7 +159,7 @@ const ShopPage = ({ category, title }: ShopPageProps) => {
                 {title}
               </h1>
               <p className="text-muted-foreground">
-                {filteredProducts.length} products available
+                {filteredItems.length} {category === 'ebooks' ? 'e-books' : 'products'} available
               </p>
             </div>
             <div className="flex items-center space-x-4 mt-4 md:mt-0">
@@ -290,23 +268,32 @@ const ShopPage = ({ category, title }: ShopPageProps) => {
                 ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' 
                 : 'grid-cols-1'
             }`}>
-              {filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+              {filteredItems.map((item) => (
+                <ProductCard key={item.id} item={item} />
               ))}
             </div>
 
-            {filteredProducts.length === 0 && (
+            {filteredItems.length === 0 && (
               <div className="text-center py-12">
-                <Search className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-pearl mb-2">No products found</h3>
+                {category === 'ebooks' ? (
+                  <Book className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                ) : (
+                  <Search className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                )}
+                <h3 className="text-xl font-semibold text-pearl mb-2">
+                  No {category === 'ebooks' ? 'e-books' : 'products'} found
+                </h3>
                 <p className="text-muted-foreground">
-                  Try adjusting your search criteria or browse our other collections
+                  {category === 'ebooks' 
+                    ? 'Add some e-books from the admin panel to see them here'
+                    : 'Try adjusting your search criteria or browse our other collections'
+                  }
                 </p>
               </div>
             )}
 
             {/* Pagination */}
-            {filteredProducts.length > 0 && (
+            {filteredItems.length > 0 && (
               <div className="flex justify-center mt-12">
                 <div className="flex items-center space-x-2">
                   <Button variant="outline" disabled>

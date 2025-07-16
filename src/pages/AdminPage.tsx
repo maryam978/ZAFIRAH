@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Edit3, Trash2, Save, Image, Package } from 'lucide-react';
+import { Plus, Edit3, Trash2, Save, Image, Package, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -8,18 +8,23 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
+import { useProducts, Product, Ebook } from '@/contexts/ProductsContext';
 
 const AdminPage = () => {
   const { toast } = useToast();
-  const [products, setProducts] = useState([
-    { id: 1, name: 'Premium Dress Shirt', category: 'mens', price: 89, stock: 25, image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400' },
-    { id: 2, name: 'Elegant Dress', category: 'womens', price: 129, stock: 15, image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400' },
-    { id: 3, name: 'Kids T-Shirt', category: 'kids', price: 29, stock: 40, image: 'https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=400' },
-    { id: 4, name: 'Running Shoes', category: 'shoes', price: 159, stock: 20, image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400' },
-    { id: 5, name: 'Designer Handbag', category: 'accessories', price: 199, stock: 12, image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400' },
-  ]);
+  const { 
+    products, 
+    ebooks, 
+    addProduct, 
+    updateProduct, 
+    deleteProduct, 
+    addEbook, 
+    updateEbook, 
+    deleteEbook 
+  } = useProducts();
 
-  const [editingProduct, setEditingProduct] = useState<any>(null);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [editingEbook, setEditingEbook] = useState<Ebook | null>(null);
 
   const [newProduct, setNewProduct] = useState({
     name: '',
@@ -28,6 +33,16 @@ const AdminPage = () => {
     stock: '',
     description: '',
     image: ''
+  });
+
+  const [newEbook, setNewEbook] = useState({
+    title: '',
+    author: '',
+    price: '',
+    description: '',
+    image: '',
+    pages: '',
+    fileSize: ''
   });
 
   const [siteSettings, setSiteSettings] = useState({
@@ -47,37 +62,40 @@ const AdminPage = () => {
       return;
     }
 
-    const product = {
-      id: Date.now(), // Use timestamp for unique ID
+    const productData = {
       name: newProduct.name,
       category: newProduct.category,
-      price: parseInt(newProduct.price),
+      price: parseFloat(newProduct.price),
       stock: parseInt(newProduct.stock) || 0,
-      image: newProduct.image || 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400'
+      image: newProduct.image || 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400',
+      description: newProduct.description,
+      rating: 4.5,
+      reviews: 0
     };
-    setProducts([...products, product]);
+    
+    addProduct(productData);
     setNewProduct({ name: '', category: '', price: '', stock: '', description: '', image: '' });
     
     toast({
       title: "Product Added",
-      description: `${product.name} has been successfully added to the catalog.`,
+      description: `${productData.name} has been successfully added to the catalog.`,
     });
   };
 
-  const handleEditProduct = (product: any) => {
+  const handleEditProduct = (product: Product) => {
     setEditingProduct(product);
     setNewProduct({
       name: product.name,
       category: product.category,
       price: product.price.toString(),
-      stock: product.stock.toString(),
-      description: '',
+      stock: product.stock?.toString() || '0',
+      description: product.description || '',
       image: product.image
     });
   };
 
   const handleUpdateProduct = () => {
-    if (!newProduct.name || !newProduct.category || !newProduct.price) {
+    if (!newProduct.name || !newProduct.category || !newProduct.price || !editingProduct) {
       toast({
         title: "Missing Information",
         description: "Please fill in name, category, and price to update the product.",
@@ -86,33 +104,29 @@ const AdminPage = () => {
       return;
     }
 
-    const updatedProduct = {
-      ...editingProduct,
+    const updatedData = {
       name: newProduct.name,
       category: newProduct.category,
-      price: parseInt(newProduct.price),
+      price: parseFloat(newProduct.price),
       stock: parseInt(newProduct.stock) || 0,
-      image: newProduct.image || editingProduct.image
+      image: newProduct.image || editingProduct.image,
+      description: newProduct.description
     };
 
-    setProducts(products.map(p => p.id === editingProduct.id ? updatedProduct : p));
+    updateProduct(editingProduct.id, updatedData);
     setEditingProduct(null);
     setNewProduct({ name: '', category: '', price: '', stock: '', description: '', image: '' });
     
     toast({
       title: "Product Updated",
-      description: `${updatedProduct.name} has been successfully updated.`,
+      description: `${updatedData.name} has been successfully updated.`,
     });
   };
 
-  const handleCancelEdit = () => {
-    setEditingProduct(null);
-    setNewProduct({ name: '', category: '', price: '', stock: '', description: '', image: '' });
-  };
 
   const handleDeleteProduct = (id: number) => {
     const productToDelete = products.find(p => p.id === id);
-    setProducts(products.filter(p => p.id !== id));
+    deleteProduct(id);
     
     toast({
       title: "Product Deleted",
@@ -120,7 +134,102 @@ const AdminPage = () => {
     });
   };
 
+  // Ebook handlers
+  const handleAddEbook = () => {
+    if (!newEbook.title || !newEbook.author || !newEbook.price) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in title, author, and price to add an e-book.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const ebookData = {
+      title: newEbook.title,
+      author: newEbook.author,
+      price: parseFloat(newEbook.price),
+      description: newEbook.description,
+      image: newEbook.image || 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400',
+      pages: parseInt(newEbook.pages) || 0,
+      fileSize: newEbook.fileSize,
+      rating: 4.5,
+      reviews: 0
+    };
+    
+    addEbook(ebookData);
+    setNewEbook({ title: '', author: '', price: '', description: '', image: '', pages: '', fileSize: '' });
+    
+    toast({
+      title: "E-book Added",
+      description: `${ebookData.title} has been successfully added to the catalog.`,
+    });
+  };
+
+  const handleEditEbook = (ebook: Ebook) => {
+    setEditingEbook(ebook);
+    setNewEbook({
+      title: ebook.title,
+      author: ebook.author,
+      price: ebook.price.toString(),
+      description: ebook.description,
+      image: ebook.image,
+      pages: ebook.pages?.toString() || '',
+      fileSize: ebook.fileSize || ''
+    });
+  };
+
+  const handleUpdateEbook = () => {
+    if (!newEbook.title || !newEbook.author || !newEbook.price || !editingEbook) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in title, author, and price to update the e-book.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const updatedData = {
+      title: newEbook.title,
+      author: newEbook.author,
+      price: parseFloat(newEbook.price),
+      description: newEbook.description,
+      image: newEbook.image || editingEbook.image,
+      pages: parseInt(newEbook.pages) || 0,
+      fileSize: newEbook.fileSize
+    };
+
+    updateEbook(editingEbook.id, updatedData);
+    setEditingEbook(null);
+    setNewEbook({ title: '', author: '', price: '', description: '', image: '', pages: '', fileSize: '' });
+    
+    toast({
+      title: "E-book Updated",
+      description: `${updatedData.title} has been successfully updated.`,
+    });
+  };
+
+  const handleDeleteEbook = (id: number) => {
+    const ebookToDelete = ebooks.find(e => e.id === id);
+    deleteEbook(id);
+    
+    toast({
+      title: "E-book Deleted",
+      description: `${ebookToDelete?.title} has been removed from the catalog.`,
+    });
+  };
+
   const categories = ['new', 'mens', 'womens', 'kids', 'sportswear', 'accessories', 'shoes'];
+
+  const handleCancelEditProduct = () => {
+    setEditingProduct(null);
+    setNewProduct({ name: '', category: '', price: '', stock: '', description: '', image: '' });
+  };
+
+  const handleCancelEditEbook = () => {
+    setEditingEbook(null);
+    setNewEbook({ title: '', author: '', price: '', description: '', image: '', pages: '', fileSize: '' });
+  };
 
   return (
     <div className="min-h-screen pt-16 bg-background">
@@ -138,9 +247,11 @@ const AdminPage = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs defaultValue="products" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="products">Products</TabsTrigger>
             <TabsTrigger value="add-product">Add Product</TabsTrigger>
+            <TabsTrigger value="ebooks">E-Books</TabsTrigger>
+            <TabsTrigger value="add-ebook">Add E-Book</TabsTrigger>
             <TabsTrigger value="settings">Site Settings</TabsTrigger>
           </TabsList>
 
@@ -271,7 +382,7 @@ const AdminPage = () => {
                       <Save className="h-4 w-4 mr-2" />
                       Update Product
                     </Button>
-                    <Button onClick={handleCancelEdit} variant="outline" className="flex-1">
+                    <Button onClick={handleCancelEditProduct} variant="outline" className="flex-1">
                       Cancel
                     </Button>
                   </div>
@@ -279,6 +390,154 @@ const AdminPage = () => {
                   <Button onClick={handleAddProduct} className="btn-luxury w-full">
                     <Plus className="h-4 w-4 mr-2" />
                     Add Product
+                  </Button>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="ebooks" className="space-y-6">
+            <Card className="luxury-card">
+              <CardHeader>
+                <CardTitle className="text-gold flex items-center">
+                  <BookOpen className="h-5 w-5 mr-2" />
+                  E-book Management
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {ebooks.map((ebook) => (
+                  <div key={ebook.id} className="flex items-center justify-between p-4 bg-charcoal-light rounded-lg">
+                    <div className="flex items-center space-x-4">
+                      <img 
+                        src={ebook.image} 
+                        alt={ebook.title}
+                        className="w-16 h-16 object-cover rounded"
+                      />
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-pearl">{ebook.title}</h3>
+                        <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                          <span>Author: {ebook.author}</span>
+                          <span>Price: ${ebook.price}</span>
+                          <span>Pages: {ebook.pages}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => handleEditEbook(ebook)}
+                      >
+                        <Edit3 className="h-4 w-4" />
+                        Edit
+                      </Button>
+                      <Button 
+                        variant="destructive" 
+                        size="sm"
+                        onClick={() => handleDeleteEbook(ebook.id)}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                  ))}
+                  {ebooks.length === 0 && (
+                    <div className="text-center py-8 text-muted-foreground">
+                      No e-books found. Add your first e-book to get started.
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="add-ebook" className="space-y-6">
+            <Card className="luxury-card">
+              <CardHeader>
+                <CardTitle className="text-gold flex items-center">
+                  <Plus className="h-5 w-5 mr-2" />
+                  {editingEbook ? 'Edit E-book' : 'Add New E-book'}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label>E-book Title</Label>
+                    <Input
+                      value={newEbook.title}
+                      onChange={(e) => setNewEbook({...newEbook, title: e.target.value})}
+                      placeholder="Enter e-book title"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Author</Label>
+                    <Input
+                      value={newEbook.author}
+                      onChange={(e) => setNewEbook({...newEbook, author: e.target.value})}
+                      placeholder="Enter author name"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Price ($)</Label>
+                    <Input
+                      type="number"
+                      step="0.01"
+                      value={newEbook.price}
+                      onChange={(e) => setNewEbook({...newEbook, price: e.target.value})}
+                      placeholder="0.00"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Pages</Label>
+                    <Input
+                      type="number"
+                      value={newEbook.pages}
+                      onChange={(e) => setNewEbook({...newEbook, pages: e.target.value})}
+                      placeholder="0"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>File Size</Label>
+                    <Input
+                      value={newEbook.fileSize}
+                      onChange={(e) => setNewEbook({...newEbook, fileSize: e.target.value})}
+                      placeholder="e.g., 2.5 MB"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label>Description</Label>
+                  <Textarea
+                    value={newEbook.description}
+                    onChange={(e) => setNewEbook({...newEbook, description: e.target.value})}
+                    placeholder="E-book description..."
+                    rows={3}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Cover Image URL</Label>
+                  <Input
+                    value={newEbook.image}
+                    onChange={(e) => setNewEbook({...newEbook, image: e.target.value})}
+                    placeholder="https://images.unsplash.com/photo-1234567890/ebook-cover.jpg"
+                  />
+                  <p className="text-xs text-muted-foreground">Enter cover image URL</p>
+                </div>
+                {editingEbook ? (
+                  <div className="flex space-x-2">
+                    <Button onClick={handleUpdateEbook} className="btn-luxury flex-1">
+                      <Save className="h-4 w-4 mr-2" />
+                      Update E-book
+                    </Button>
+                    <Button onClick={handleCancelEditEbook} variant="outline" className="flex-1">
+                      Cancel
+                    </Button>
+                  </div>
+                ) : (
+                  <Button onClick={handleAddEbook} className="btn-luxury w-full">
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add E-book
                   </Button>
                 )}
               </CardContent>
@@ -350,18 +609,18 @@ const AdminPage = () => {
                     <div className="text-2xl font-bold text-gold">{products.length}</div>
                     <div className="text-sm text-muted-foreground">Total Products</div>
                   </div>
-                  <div className="text-center p-4 bg-charcoal-light rounded-lg">
-                    <div className="text-2xl font-bold text-gold">{categories.length}</div>
-                    <div className="text-sm text-muted-foreground">Categories</div>
-                  </div>
-                  <div className="text-center p-4 bg-charcoal-light rounded-lg">
-                    <div className="text-2xl font-bold text-gold">{products.reduce((sum, p) => sum + p.stock, 0)}</div>
-                    <div className="text-sm text-muted-foreground">Total Stock</div>
-                  </div>
-                  <div className="text-center p-4 bg-charcoal-light rounded-lg">
-                    <div className="text-2xl font-bold text-gold">${products.reduce((sum, p) => sum + (p.price * p.stock), 0)}</div>
-                    <div className="text-sm text-muted-foreground">Inventory Value</div>
-                  </div>
+                   <div className="text-center p-4 bg-charcoal-light rounded-lg">
+                     <div className="text-2xl font-bold text-gold">{categories.length}</div>
+                     <div className="text-sm text-muted-foreground">Categories</div>
+                   </div>
+                   <div className="text-center p-4 bg-charcoal-light rounded-lg">
+                     <div className="text-2xl font-bold text-gold">{products.reduce((sum, p) => sum + (p.stock || 0), 0)}</div>
+                     <div className="text-sm text-muted-foreground">Total Stock</div>
+                   </div>
+                   <div className="text-center p-4 bg-charcoal-light rounded-lg">
+                     <div className="text-2xl font-bold text-gold">{ebooks.length}</div>
+                     <div className="text-sm text-muted-foreground">E-books</div>
+                   </div>
                 </div>
               </CardContent>
             </Card>

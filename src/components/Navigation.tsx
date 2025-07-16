@@ -16,6 +16,7 @@ const Navigation = () => {
     { name: 'Sportswear', href: '/sportswear' },
     { name: 'Accessories', href: '/accessories' },
     { name: 'Shoes', href: '/shoes' },
+    { name: 'E-Books', href: '/ebooks' },
     { name: 'Admin', href: '/admin' },
   ];
 
