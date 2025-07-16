@@ -44,7 +44,7 @@ interface ProductsContextType {
 const ProductsContext = createContext<ProductsContextType | undefined>(undefined);
 
 export const ProductsProvider = ({ children }: { children: ReactNode }) => {
-  // Initialize with the specific hoodie product only
+  // Initialize with both hoodie products
   const [products, setProducts] = useState<Product[]>([
     {
       id: 1,
@@ -57,6 +57,18 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
       description: "Male Model is 6'0\" wearing a Size Medium. Female Model is 5'9\" wearing size Small\nEversoft fabric provides premium softness was after wash\nDouble-needle stitching on the neck and hems for durability\nRibbed cuffs and waistband that hold their shape\nShoulder-to-shoulder neck tape for comfort and durability",
       stock: 50,
       isNew: true
+    },
+    {
+      id: 2,
+      name: "Men's Zip-up Hoodie",
+      price: 55.00,
+      image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop",
+      rating: 4.7,
+      reviews: 89,
+      category: 'mens',
+      description: "THE FIT - Standard-fit men's full-zip hoodie that hits at the hip.\nTHE FEEL - Crafted with a soft, midweight 9 oz. fleece with a brushed interior for warmth without extra bulk.\nTHE LOOK - Ribbed cuffs and hem add structure, while the double-lined hood keeps you covered and warm.\nLOW PILL, LOW SHRINK - High-quality fabric helps to reduce pilling and shrinkage, so this piece can be a longtime favorite.\nNote: C logo patch color may vary from image, and fabric content may vary",
+      stock: 35,
+      isNew: false
     }
   ]);
 
