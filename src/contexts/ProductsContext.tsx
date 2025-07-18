@@ -192,7 +192,20 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
     }
   ]);
 
-  const [ebooks, setEbooks] = useState<Ebook[]>([]);
+  const [ebooks, setEbooks] = useState<Ebook[]>([
+    {
+      id: 1,
+      title: "GREATNESS 101",
+      author: "Muhammad Zaid",
+      price: 12.99,
+      image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=400&fit=crop",
+      rating: 4.8,
+      reviews: 245,
+      description: "🌟 Take Back Control. Reclaim Your Power. Transform Your Life. 🌟\nIntroducing \"Greatness 101: The Ultimate Guide to Self-Discipline and Life Control\"\n\nAre you tired of feeling stuck, overwhelmed, or constantly behind on your goals? Do you ever feel like life is happening to you instead of because of you?\n\nThis isn't just another self-help book. \"Greatness 101\" is a bold, no-excuses blueprint for reclaiming your focus, rebuilding your discipline, and finally taking full command of your life.\n\nInside, you'll discover:\n\n🔥 Proven, science-backed strategies to strengthen self-discipline and resist distractions\n\n🧠 Mental rewiring techniques that eliminate procrastination and build unstoppable momentum\n\n📅 Powerful routines and rituals that create structure, clarity, and drive\n\n🛠️ Tools to break bad habits, master emotional control, and make decisions with confidence\n\n💡 A results-driven mindset that empowers you to turn chaos into control—and dreams into results\n\nWhether you're struggling with time management, battling self-doubt, or just ready to level up, this book gives you the clarity and courage to finally take charge.\n\nThis is your turning point.\nIf you're serious about changing your life—not someday, but starting now—then \"Master Your Moment\" is the book you've been waiting for.\n\n✅ Ideal for entrepreneurs, students, professionals, and anyone ready to break free from burnout and build a life on your terms.\n\nDiscipline isn't punishment. It's power.\nClaim yours today.",
+      pages: 245,
+      fileSize: "2.1 MB"
+    }
+  ]);
 
   const addProduct = (productData: Omit<Product, 'id'>) => {
     const newProduct = {
