@@ -189,6 +189,126 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
       description: "Fabric type61.3% Cotton, 38.7% Rayon\nCare instructionsMachine Wash\nOriginImported\nClosure typePull On\nAbout this item\nEnjoy the perfect combination of comfort and style. These ladies summer dresses are crafted from cozy and sumptuously soft fabric. The lightweight and airy material allows for optimal airflow, keeping you cool and comfy even on hot days. With gentle and soft texture, the fabric caresses your skin, providing a luxurious and cozy wearing experience.\nThese floral bohemian maxi dresses are printed brightly with various geometric patterns or vivid flowers, lovely or generous. Wear your favorite color and have a date with spring. Wherever you go, beach, vocation, cocktail, party, wedding, church or work, you are the protagonist of your own life.\nPuffed sleeves adding a lovely touch of cuteness and hiding your larger arms at the same time. Catching your eyes, three layers of flounce trim on the tiered hem flowing like the undulating waves, romantic and dreamy. The swing hem falling naturally at your ankles. Every act and move of you will radiate stunning feminine vibes.\nFeaturing a variety of beauty, these casual loose dresses flatter all figures and styles. With adorable detailing, playfulness of young girls can be showcased fully. For those who are looking for sophisticated and elegant style, our dresses add some taste and elegance to your look by vivid prints and fine details.\nHand wash in cold water. Line dry. Low ironing if necessary.",
       stock: 40,
       isNew: true
+    },
+    {
+      id: 13,
+      name: "Summer Casual Bohemian Floral Dresses for Women Puff Short Sleeve Long Maxi Dress with Pockets ETX",
+      price: 45.00,
+      image: "/lovable-uploads/e7820fa8-08ee-460e-8c42-b4fc88fe45e9.png",
+      rating: 4.7,
+      reviews: 156,
+      category: 'womens',
+      description: "Fabric type61.3% Cotton, 38.7% Rayon\nCare instructionsMachine Wash\nOriginImported\nClosure typePull On\nAbout this item\nEnjoy the perfect combination of comfort and style. These ladies summer dresses are crafted from cozy and sumptuously soft fabric. The lightweight and airy material allows for optimal airflow, keeping you cool and comfy even on hot days. With gentle and soft texture, the fabric caresses your skin, providing a luxurious and cozy wearing experience.\nThese floral bohemian maxi dresses are printed brightly with various geometric patterns or vivid flowers, lovely or generous. Wear your favorite color and have a date with spring. Wherever you go, beach, vocation, cocktail, party, wedding, church or work, you are the protagonist of your own life.\nPuffed sleeves adding a lovely touch of cuteness and hiding your larger arms at the same time. Catching your eyes, three layers of flounce trim on the tiered hem flowing like the undulating waves, romantic and dreamy. The swing hem falling naturally at your ankles. Every act and move of you will radiate stunning feminine vibes.\nFeaturing a variety of beauty, these casual loose dresses flatter all figures and styles. With adorable detailing, playfulness of young girls can be showcased fully. For those who are looking for sophisticated and elegant style, our dresses add some taste and elegance to your look by vivid prints and fine details.\nHand wash in cold water. Line dry. Low ironing if necessary.",
+      stock: 40,
+      isNew: true
+    },
+    {
+      id: 14,
+      name: "Summer Casual Bohemian Floral Dresses for Women Puff Short Sleeve Long Maxi Dress with Pockets ETX",
+      price: 45.00,
+      image: "/lovable-uploads/d894421f-e1fe-46d1-ac4f-6aab78286855.png",
+      rating: 4.6,
+      reviews: 142,
+      category: 'womens',
+      description: "Fabric type61.3% Cotton, 38.7% Rayon\nCare instructionsMachine Wash\nOriginImported\nClosure typePull On\nAbout this item\nEnjoy the perfect combination of comfort and style. These ladies summer dresses are crafted from cozy and sumptuously soft fabric. The lightweight and airy material allows for optimal airflow, keeping you cool and comfy even on hot days. With gentle and soft texture, the fabric caresses your skin, providing a luxurious and cozy wearing experience.\nThese floral bohemian maxi dresses are printed brightly with various geometric patterns or vivid flowers, lovely or generous. Wear your favorite color and have a date with spring. Wherever you go, beach, vocation, cocktail, party, wedding, church or work, you are the protagonist of your own life.\nPuffed sleeves adding a lovely touch of cuteness and hiding your larger arms at the same time. Catching your eyes, three layers of flounce trim on the tiered hem flowing like the undulating waves, romantic and dreamy. The swing hem falling naturally at your ankles. Every act and move of you will radiate stunning feminine vibes.\nFeaturing a variety of beauty, these casual loose dresses flatter all figures and styles. With adorable detailing, playfulness of young girls can be showcased fully. For those who are looking for sophisticated and elegant style, our dresses add some taste and elegance to your look by vivid prints and fine details.\nHand wash in cold water. Line dry. Low ironing if necessary.",
+      stock: 40,
+      isNew: true
+    },
+    {
+      id: 15,
+      name: "Summer Casual Bohemian Floral Dresses for Women Puff Short Sleeve Long Maxi Dress with Pockets ETX",
+      price: 45.00,
+      image: "/lovable-uploads/9bd43add-4a1a-4142-a3b1-00b9aa093c10.png",
+      rating: 4.8,
+      reviews: 189,
+      category: 'womens',
+      description: "Fabric type61.3% Cotton, 38.7% Rayon\nCare instructionsMachine Wash\nOriginImported\nClosure typePull On\nAbout this item\nEnjoy the perfect combination of comfort and style. These ladies summer dresses are crafted from cozy and sumptuously soft fabric. The lightweight and airy material allows for optimal airflow, keeping you cool and comfy even on hot days. With gentle and soft texture, the fabric caresses your skin, providing a luxurious and cozy wearing experience.\nThese floral bohemian maxi dresses are printed brightly with various geometric patterns or vivid flowers, lovely or generous. Wear your favorite color and have a date with spring. Wherever you go, beach, vocation, cocktail, party, wedding, church or work, you are the protagonist of your own life.\nPuffed sleeves adding a lovely touch of cuteness and hiding your larger arms at the same time. Catching your eyes, three layers of flounce trim on the tiered hem flowing like the undulating waves, romantic and dreamy. The swing hem falling naturally at your ankles. Every act and move of you will radiate stunning feminine vibes.\nFeaturing a variety of beauty, these casual loose dresses flatter all figures and styles. With adorable detailing, playfulness of young girls can be showcased fully. For those who are looking for sophisticated and elegant style, our dresses add some taste and elegance to your look by vivid prints and fine details.\nHand wash in cold water. Line dry. Low ironing if necessary.",
+      stock: 40,
+      isNew: true
+    },
+    {
+      id: 16,
+      name: "Summer Casual Bohemian Floral Dresses for Women Puff Short Sleeve Long Maxi Dress with Pockets ETX",
+      price: 45.00,
+      image: "/lovable-uploads/058f6742-57e2-4062-8b02-fcc2a9300e83.png",
+      rating: 4.5,
+      reviews: 128,
+      category: 'womens',
+      description: "Fabric type61.3% Cotton, 38.7% Rayon\nCare instructionsMachine Wash\nOriginImported\nClosure typePull On\nAbout this item\nEnjoy the perfect combination of comfort and style. These ladies summer dresses are crafted from cozy and sumptuously soft fabric. The lightweight and airy material allows for optimal airflow, keeping you cool and comfy even on hot days. With gentle and soft texture, the fabric caresses your skin, providing a luxurious and cozy wearing experience.\nThese floral bohemian maxi dresses are printed brightly with various geometric patterns or vivid flowers, lovely or generous. Wear your favorite color and have a date with spring. Wherever you go, beach, vocation, cocktail, party, wedding, church or work, you are the protagonist of your own life.\nPuffed sleeves adding a lovely touch of cuteness and hiding your larger arms at the same time. Catching your eyes, three layers of flounce rim on the tiered hem flowing like the undulating waves, romantic and dreamy. The swing hem falling naturally at your ankles. Every act and move of you will radiate stunning feminine vibes.\nFeaturing a variety of beauty, these casual loose dresses flatter all figures and styles. With adorable detailing, playfulness of young girls can be showcased fully. For those who are looking for sophisticated and elegant style, our dresses add some taste and elegance to your look by vivid prints and fine details.\nHand wash in cold water. Line dry. Low ironing if necessary.",
+      stock: 40,
+      isNew: true
+    },
+    {
+      id: 17,
+      name: "Summer Casual Bohemian Floral Dresses for Women Puff Short Sleeve Long Maxi Dress with Pockets ETX",
+      price: 45.00,
+      image: "/lovable-uploads/7810b262-9f96-4467-9ac9-d8587e1921e5.png",
+      rating: 4.7,
+      reviews: 174,
+      category: 'womens',
+      description: "Fabric type61.3% Cotton, 38.7% Rayon\nCare instructionsMachine Wash\nOriginImported\nClosure typePull On\nAbout this item\nEnjoy the perfect combination of comfort and style. These ladies summer dresses are crafted from cozy and sumptuously soft fabric. The lightweight and airy material allows for optimal airflow, keeping you cool and comfy even on hot days. With gentle and soft texture, the fabric caresses your skin, providing a luxurious and cozy wearing experience.\nThese floral bohemian maxi dresses are printed brightly with various geometric patterns or vivid flowers, lovely or generous. Wear your favorite color and have a date with spring. Wherever you go, beach, vocation, cocktail, party, wedding, church or work, you are the protagonist of your own life.\nPuffed sleeves adding a lovely touch of cuteness and hiding your larger arms at the same time. Catching your eyes, three layers of flounce trim on the tiered hem flowing like the undulating waves, romantic and dreamy. The swing hem falling naturally at your ankles. Every act and move of you will radiate stunning feminine vibes.\nFeaturing a variety of beauty, these casual loose dresses flatter all figures and styles. With adorable detailing, playfulness of young girls can be showcased fully. For those who are looking for sophisticated and elegant style, our dresses add some taste and elegance to your look by vivid prints and fine details.\nHand wash in cold water. Line dry. Low ironing if necessary.",
+      stock: 40,
+      isNew: true
+    },
+    {
+      id: 18,
+      name: "Summer Casual Bohemian Floral Dresses for Women Puff Short Sleeve Long Maxi Dress with Pockets ETX",
+      price: 45.00,
+      image: "/lovable-uploads/33a8c198-c91a-43e6-9341-3f78b3e5b479.png",
+      rating: 4.6,
+      reviews: 195,
+      category: 'womens',
+      description: "Fabric type61.3% Cotton, 38.7% Rayon\nCare instructionsMachine Wash\nOriginImported\nClosure typePull On\nAbout this item\nEnjoy the perfect combination of comfort and style. These ladies summer dresses are crafted from cozy and sumptuously soft fabric. The lightweight and airy material allows for optimal airflow, keeping you cool and comfy even on hot days. With gentle and soft texture, the fabric caresses your skin, providing a luxurious and cozy wearing experience.\nThese floral bohemian maxi dresses are printed brightly with various geometric patterns or vivid flowers, lovely or generous. Wear your favorite color and have a date with spring. Wherever you go, beach, vocation, cocktail, party, wedding, church or work, you are the protagonist of your own life.\nPuffed sleeves adding a lovely touch of cuteness and hiding your larger arms at the same time. Catching your eyes, three layers of flounce trim on the tiered hem flowing like the undulating waves, romantic and dreamy. The swing hem falling naturally at your ankles. Every act and move of you will radiate stunning feminine vibes.\nFeaturing a variety of beauty, these casual loose dresses flatter all figures and styles. With adorable detailing, playfulness of young girls can be showcased fully. For those who are looking for sophisticated and elegant style, our dresses add some taste and elegance to your look by vivid prints and fine details.\nHand wash in cold water. Line dry. Low ironing if necessary.",
+      stock: 40,
+      isNew: true
+    },
+    {
+      id: 19,
+      name: "Summer Casual Bohemian Floral Dresses for Women Puff Short Sleeve Long Maxi Dress with Pockets ETX",
+      price: 45.00,
+      image: "/lovable-uploads/a42d66d2-f7b1-4ae0-8c64-3e4285f8ab1d.png",
+      rating: 4.8,
+      reviews: 201,
+      category: 'womens',
+      description: "Fabric type61.3% Cotton, 38.7% Rayon\nCare instructionsMachine Wash\nOriginImported\nClosure typePull On\nAbout this item\nEnjoy the perfect combination of comfort and style. These ladies summer dresses are crafted from cozy and sumptuously soft fabric. The lightweight and airy material allows for optimal airflow, keeping you cool and comfy even on hot days. With gentle and soft texture, the fabric caresses your skin, providing a luxurious and cozy wearing experience.\nThese floral bohemian maxi dresses are printed brightly with various geometric patterns or vivid flowers, lovely or generous. Wear your favorite color and have a date with spring. Wherever you go, beach, vocation, cocktail, party, wedding, church or work, you are the protagonist of your own life.\nPuffed sleeves adding a lovely touch of cuteness and hiding your larger arms at the same time. Catching your eyes, three layers of flounce trim on the tiered hem flowing like the undulating waves, romantic and dreamy. The swing hem falling naturally at your ankles. Every act and move of you will radiate stunning feminine vibes.\nFeaturing a variety of beauty, these casual loose dresses flatter all figures and styles. With adorable detailing, playfulness of young girls can be showcased fully. For those who are looking for sophisticated and elegant style, our dresses add some taste and elegance to your look by vivid prints and fine details.\nHand wash in cold water. Line dry. Low ironing if necessary.",
+      stock: 40,
+      isNew: true
+    },
+    {
+      id: 20,
+      name: "Summer Casual Bohemian Floral Dresses for Women Puff Short Sleeve Long Maxi Dress with Pockets ETX",
+      price: 45.00,
+      image: "/lovable-uploads/6f3705e0-3cbe-4a42-8a9b-a8308b9a25c7.png",
+      rating: 4.6,
+      reviews: 167,
+      category: 'womens',
+      description: "Fabric type61.3% Cotton, 38.7% Rayon\nCare instructionsMachine Wash\nOriginImported\nClosure typePull On\nAbout this item\nEnjoy the perfect combination of comfort and style. These ladies summer dresses are crafted from cozy and sumptuously soft fabric. The lightweight and airy material allows for optimal airflow, keeping you cool and comfy even on hot days. With gentle and soft texture, the fabric caresses your skin, providing a luxurious and cozy wearing experience.\nThese floral bohemian maxi dresses are printed brightly with various geometric patterns or vivid flowers, lovely or generous. Wear your favorite color and have a date with spring. Wherever you go, beach, vocation, cocktail, party, wedding, church or work, you are the protagonist of your own life.\nPuffed sleeves adding a lovely touch of cuteness and hiding your larger arms at the same time. Catching your eyes, three layers of flounce trim on the tiered hem flowing like the undulating waves, romantic and dreamy. The swing hem falling naturally at your ankles. Every act and move of you will radiate stunning feminine vibes.\nFeaturing a variety of beauty, these casual loose dresses flatter all figures and styles. With adorable detailing, playfulness of young girls can be showcased fully. For those who are looking for sophisticated and elegant style, our dresses add some taste and elegance to your look by vivid prints and fine details.\nHand wash in cold water. Line dry. Low ironing if necessary.",
+      stock: 40,
+      isNew: true
+    },
+    {
+      id: 21,
+      name: "Summer Casual Bohemian Floral Dresses for Women Puff Short Sleeve Long Maxi Dress with Pockets ETX",
+      price: 45.00,
+      image: "/lovable-uploads/0afb4bc9-accc-4223-a219-b931c5df5c91.png",
+      rating: 4.7,
+      reviews: 183,
+      category: 'womens',
+      description: "Fabric type61.3% Cotton, 38.7% Rayon\nCare instructionsMachine Wash\nOriginImported\nClosure typePull On\nAbout this item\nEnjoy the perfect combination of comfort and style. These ladies summer dresses are crafted from cozy and sumptuously soft fabric. The lightweight and airy material allows for optimal airflow, keeping you cool and comfy even on hot days. With gentle and soft texture, the fabric caresses your skin, providing a luxurious and cozy wearing experience.\nThese floral bohemian maxi dresses are printed brightly with various geometric patterns or vivid flowers, lovely or generous. Wear your favorite color and have a date with spring. Wherever you go, beach, vocation, cocktail, party, wedding, church or work, you are the protagonist of your own life.\nPuffed sleeves adding a lovely touch of cuteness and hiding your larger arms at the same time. Catching your eyes, three layers of flounce trim on the tiered hem flowing like the undulating waves, romantic and dreamy. The swing hem falling naturally at your ankles. Every act and move of you will radiate stunning feminine vibes.\nFeaturing a variety of beauty, these casual loose dresses flatter all figures and styles. With adorable detailing, playfulness of young girls can be showcased fully. For those who are looking for sophisticated and elegant style, our dresses add some taste and elegance to your look by vivid prints and fine details.\nHand wash in cold water. Line dry. Low ironing if necessary.",
+      stock: 40,
+      isNew: true
+    },
+    {
+      id: 22,
+      name: "Summer Casual Bohemian Floral Dresses for Women Puff Short Sleeve Long Maxi Dress with Pockets ETX",
+      price: 45.00,
+      image: "/lovable-uploads/80c359fc-58e3-42fd-be81-4396bb737c6e.png",
+      rating: 4.5,
+      reviews: 149,
+      category: 'womens',
+      description: "Fabric type61.3% Cotton, 38.7% Rayon\nCare instructionsMachine Wash\nOriginImported\nClosure typePull On\nAbout this item\nEnjoy the perfect combination of comfort and style. These ladies summer dresses are crafted from cozy and sumptuously soft fabric. The lightweight and airy material allows for optimal airflow, keeping you cool and comfy even on hot days. With gentle and soft texture, the fabric caresses your skin, providing a luxurious and cozy wearing experience.\nThese floral bohemian maxi dresses are printed brightly with various geometric patterns or vivid flowers, lovely or generous. Wear your favorite color and have a date with spring. Wherever you go, beach, vocation, cocktail, party, wedding, church or work, you are the protagonist of your own life.\nPuffed sleeves adding a lovely touch of cuteness and hiding your larger arms at the same time. Catching your eyes, three layers of flounce trim on the tiered hem flowing like the undulating waves, romantic and dreamy. The swing hem falling naturally at your ankles. Every act and move of you will radiate stunning feminine vibes.\nFeaturing a variety of beauty, these casual loose dresses flatter all figures and styles. With adorable detailing, playfulness of young girls can be showcased fully. For those who are looking for sophisticated and elegant style, our dresses add some taste and elegance to your look by vivid prints and fine details.\nHand wash in cold water. Line dry. Low ironing if necessary.",
+      stock: 40,
+      isNew: true
     }
   ]);
 
