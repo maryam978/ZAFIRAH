@@ -44,7 +44,7 @@ interface ProductsContextType {
 const ProductsContext = createContext<ProductsContextType | undefined>(undefined);
 
 export const ProductsProvider = ({ children }: { children: ReactNode }) => {
-  // Initialize with hoodie products and bohemian dresses
+  // Initialize with hoodie products, bohemian dresses, and t-shirts
   const [products, setProducts] = useState<Product[]>([
     {
       id: 1,
@@ -308,6 +308,248 @@ export const ProductsProvider = ({ children }: { children: ReactNode }) => {
       category: 'womens',
       description: "Fabric type61.3% Cotton, 38.7% Rayon\nCare instructionsMachine Wash\nOriginImported\nClosure typePull On\nAbout this item\nEnjoy the perfect combination of comfort and style. These ladies summer dresses are crafted from cozy and sumptuously soft fabric. The lightweight and airy material allows for optimal airflow, keeping you cool and comfy even on hot days. With gentle and soft texture, the fabric caresses your skin, providing a luxurious and cozy wearing experience.\nThese floral bohemian maxi dresses are printed brightly with various geometric patterns or vivid flowers, lovely or generous. Wear your favorite color and have a date with spring. Wherever you go, beach, vocation, cocktail, party, wedding, church or work, you are the protagonist of your own life.\nPuffed sleeves adding a lovely touch of cuteness and hiding your larger arms at the same time. Catching your eyes, three layers of flounce trim on the tiered hem flowing like the undulating waves, romantic and dreamy. The swing hem falling naturally at your ankles. Every act and move of you will radiate stunning feminine vibes.\nFeaturing a variety of beauty, these casual loose dresses flatter all figures and styles. With adorable detailing, playfulness of young girls can be showcased fully. For those who are looking for sophisticated and elegant style, our dresses add some taste and elegance to your look by vivid prints and fine details.\nHand wash in cold water. Line dry. Low ironing if necessary.",
       stock: 40,
+      isNew: true
+    },
+    // T-Shirts for Mens Section
+    {
+      id: 23,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/9f76a4bd-a417-41e8-8a69-d273967ef9c4.png",
+      rating: 4.7,
+      reviews: 89,
+      category: 'mens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 24,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/7e81cd02-d385-4d73-9352-dc89da8951ce.png",
+      rating: 4.6,
+      reviews: 124,
+      category: 'mens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 25,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/ce3975d2-4532-44e4-9575-6e541e77a51d.png",
+      rating: 4.8,
+      reviews: 156,
+      category: 'mens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 26,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/4939d019-4db9-4849-8244-c88b4a79a9ff.png",
+      rating: 4.5,
+      reviews: 98,
+      category: 'mens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 27,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/1c69baf7-0dc6-4c54-b745-b1280e217441.png",
+      rating: 4.7,
+      reviews: 142,
+      category: 'mens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 28,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/d2a3bf45-68e1-439d-90f4-1287320ba7eb.png",
+      rating: 4.6,
+      reviews: 167,
+      category: 'mens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 29,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/1a2e1aaa-8035-4279-a4e4-55c29a86a8fb.png",
+      rating: 4.8,
+      reviews: 189,
+      category: 'mens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 30,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/e69c483e-4124-4c70-842b-91fc92bf8c48.png",
+      rating: 4.5,
+      reviews: 134,
+      category: 'mens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 31,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/b3b6937b-9315-4974-b80a-22614974840f.png",
+      rating: 4.7,
+      reviews: 178,
+      category: 'mens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 32,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/04185589-9215-49ff-a11e-10c533bf7764.png",
+      rating: 4.6,
+      reviews: 203,
+      category: 'mens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    // T-Shirts for Womens Section
+    {
+      id: 33,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/9f76a4bd-a417-41e8-8a69-d273967ef9c4.png",
+      rating: 4.7,
+      reviews: 89,
+      category: 'womens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 34,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/7e81cd02-d385-4d73-9352-dc89da8951ce.png",
+      rating: 4.6,
+      reviews: 124,
+      category: 'womens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 35,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/ce3975d2-4532-44e4-9575-6e541e77a51d.png",
+      rating: 4.8,
+      reviews: 156,
+      category: 'womens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 36,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/4939d019-4db9-4849-8244-c88b4a79a9ff.png",
+      rating: 4.5,
+      reviews: 98,
+      category: 'womens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 37,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/1c69baf7-0dc6-4c54-b745-b1280e217441.png",
+      rating: 4.7,
+      reviews: 142,
+      category: 'womens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 38,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/d2a3bf45-68e1-439d-90f4-1287320ba7eb.png",
+      rating: 4.6,
+      reviews: 167,
+      category: 'womens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 39,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/1a2e1aaa-8035-4279-a4e4-55c29a86a8fb.png",
+      rating: 4.8,
+      reviews: 189,
+      category: 'womens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 40,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/e69c483e-4124-4c70-842b-91fc92bf8c48.png",
+      rating: 4.5,
+      reviews: 134,
+      category: 'womens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 41,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/b3b6937b-9315-4974-b80a-22614974840f.png",
+      rating: 4.7,
+      reviews: 178,
+      category: 'womens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
+      isNew: true
+    },
+    {
+      id: 42,
+      name: "Men's Short Sleeve Graphic Fashion T-Shirt",
+      price: 40.00,
+      image: "/lovable-uploads/04185589-9215-49ff-a11e-10c533bf7764.png",
+      rating: 4.6,
+      reviews: 203,
+      category: 'womens',
+      description: "Fabric type100% Combed Cotton\nCare instructionsMachine Wash\nOriginMade in the USA and Imported\nClosure typePull On\nAbout this item\n100% Combed Ring-Spun Cotton\nFeel: Soft Wash\nMachine Washable\nTagless Neck Label.",
+      stock: 999,
       isNew: true
     }
   ]);
